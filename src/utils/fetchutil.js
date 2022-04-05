@@ -14,11 +14,10 @@ export const get = (url, parameters) => {
     return fetch(url + query, {
         method: "GET",
         headers: {
-            'Accept':'application/json',
             ...commonHeader
         }
     })
         .then(result => result.json())
-        .then(data => console.log(data))
+        .then(data => console.log(data.content))
         .catch(e => console.log(e))
 };

@@ -18,10 +18,10 @@ const MainPage = () => {
             page: pageNumber
         }
 
-        get('http://127.0.0.1:8080/notice', parameters)
+        get('/api/notice', parameters)
             .then(response => {
-                console.log(response)
-                setNotices(response.json().content);
+                console.log(response.content.content)
+                setNotices(response.content.json());
             })
 
         setLoading(false);
