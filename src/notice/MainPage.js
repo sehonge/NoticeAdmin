@@ -18,9 +18,10 @@ const MainPage = () => {
             page: pageNumber
         }
 
-        get('/notice/search', parameters)
+        get('http://127.0.0.1:8080/notice', parameters)
             .then(response => {
-                setNotices(response.content);
+                console.log(response)
+                setNotices(response.json().content);
             })
 
         setLoading(false);
@@ -44,3 +45,5 @@ const MainPage = () => {
         </Container>
     )
 }
+
+export default MainPage;

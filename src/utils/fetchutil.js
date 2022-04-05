@@ -1,6 +1,6 @@
 
 const commonHeader = {
-    "X-Requested-With" : "XMLHttpRequest"
+    'X-Requested-With':'XMLHttpRequest'
 };
 
 export const get = (url, parameters) => {
@@ -14,9 +14,11 @@ export const get = (url, parameters) => {
     return fetch(url + query, {
         method: "GET",
         headers: {
+            'Accept':'application/json',
             ...commonHeader
         }
     })
         .then(result => result.json())
+        .then(data => console.log(data))
         .catch(e => console.log(e))
 };
