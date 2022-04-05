@@ -18,6 +18,5 @@ export const get = (url, parameters) => {
         }
     })
         .then(result => result.json())
-        .then(data => console.log(data.content))
         .catch(e => console.log(e))
 };

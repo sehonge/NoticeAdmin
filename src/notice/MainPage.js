@@ -20,8 +20,8 @@ const MainPage = () => {
 
         get('/api/notice', parameters)
             .then(response => {
-                console.log(response.content.content)
-                setNotices(response.content.json());
+                console.log(response)
+                setNotices(response);
             })
 
         setLoading(false);
@@ -36,11 +36,11 @@ const MainPage = () => {
                 <h2>공지 어드민</h2>
             </div>
 
-            <NoticeTable notices={notices}></NoticeTable>
+            <NoticeTable notices={notices.content}></NoticeTable>
 
             <hr className="my-4"/>
             <div className="float-end">
-                <NoticePageNumber pageInfo={pageInfo} setPageNumber={setPageNumber}></NoticePageNumber>
+                {/*<NoticePageNumber pageInfo={pageInfo} setPageNumber={setPageNumber}></NoticePageNumber>*/}
             </div>
         </Container>
     )
