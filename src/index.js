@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {createRoot} from "react-dom/client";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css' // Importing the Bootstrap CSS
 
 const container = document.getElementById('root');
 const root = createRoot(container);

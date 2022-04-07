@@ -3,6 +3,8 @@ import {get} from "../utils/fetchutil";
 import {Container} from "react-bootstrap";
 import NoticeTable from "./NoticeTable";
 import NoticePageNumber from "./NoticePageNumber";
+import Button from "react-bootstrap/Button"
+import {Link} from "react-router-dom";
 
 const MainPage = () => {
 
@@ -35,6 +37,16 @@ const MainPage = () => {
             <div>
                 <h2>공지 어드민</h2>
             </div>
+
+            <br/>
+            <hr className="my-4"/>
+            <Link to="/add">
+                <Button variant="primary" className="float-end">등록</Button>
+            </Link>
+            <br/>
+            <br/>
+            <br/>
+
 
             <NoticeTable notices={notices.content}></NoticeTable>
 

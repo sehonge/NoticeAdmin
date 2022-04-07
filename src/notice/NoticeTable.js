@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 const NoticeTable = (data) => {
     console.log(data);
     return (
-        <Table striped bordered hover style={{borderSpacing: '10px'}}>
+        <Table striped bordered hover  style={{borderSpacing: '10px'}}>
             <thead>
             <tr>
                 <th scope="col">ID</th>
