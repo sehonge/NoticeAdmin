@@ -1,9 +1,24 @@
 import {Col, Container, Form, FormGroup, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
+import {useState} from "react";
 
 const AddNotice = () => {
 
+    const [notice, setNotice] = useState(null);
+
+    const onChange = (e) => {
+        const {value, key} = e.target;
+        setNotice({
+            ...notice,
+            [key]: value
+        });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(notice);
+    }
 
     return (
         <Container style={{width:"50%"}}>
@@ -11,11 +26,11 @@ const AddNotice = () => {
                 <h2>공지사항 추가</h2>
             </div>
 
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3" controlId="title">
                     <Form.Label column sm="2">제목</Form.Label>
                     <Col sm="10">
-                        <Form.Control placeholder="100자 이하의 제목을 입력해주세요."></Form.Control>
+                        <Form.Control onChange={onChange} placeholder="100자 이하의 제목을 입력해주세요."></Form.Control>
                     </Col>
                 </Form.Group>
 
