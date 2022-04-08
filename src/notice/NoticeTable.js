@@ -1,4 +1,5 @@
 import Table from "react-bootstrap/Table";
+import {Link} from "react-router-dom";
 
 const NoticeTable = (data) => {
     return (
@@ -19,7 +20,11 @@ const NoticeTable = (data) => {
             {data.notices.map((notice) => (
                 <tr key={notice.id}>
                     <td>{notice.id}</td>
-                    <td>{notice.title}</td>
+                    <td>
+                        <Link to={`/${notice.id}`}>
+                            {notice.title}
+                        </Link>
+                    </td>
                     <td>{notice.start_at}</td>
                     <td>{notice.end_at}</td>
                     <td>{notice.update_by}</td>

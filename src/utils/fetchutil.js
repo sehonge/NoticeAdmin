@@ -5,12 +5,12 @@ const commonHeader = {
 
 export const get = (url, parameters) => {
     let query = '';
+
     if (parameters !== null) {
         query = '?' + Object.keys(parameters)
             .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key]))
             .join('&');
     }
-
     return fetch(url + query, {
         method: "GET",
         headers: {
