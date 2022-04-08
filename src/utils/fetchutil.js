@@ -20,3 +20,16 @@ export const get = (url, parameters) => {
         .then(result => result.json())
         .catch(e => console.log(e))
 };
+
+export const post = (url, body) => {
+    return fetch(url, {
+        method: "POST",
+        headers: {
+            ...commonHeader,
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify(body)
+    })
+        .then(result => result.json())
+        .catch(e => console.log(e))
+}

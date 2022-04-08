@@ -1,23 +1,35 @@
 import {Col, Container, Form, FormGroup, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {post} from "../utils/fetchutil";
 
 const AddNotice = () => {
 
-    const [notice, setNotice] = useState(null);
+
+    const initial_notice = {
+        is_activated: "true",
+        create_by: "pong"
+    }
+    //TODO("cookie 사용해서 create_by에 cookie에 저장된 user_name 대입")
+    let navigate = useNavigate();
+
+    const [notice, setNotice] = useState(initial_notice);
 
     const onChange = (e) => {
-        const {value, key} = e.target;
+        const {value, name} = e.target;
         setNotice({
             ...notice,
-            [key]: value
+            [name]: value
         });
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(notice);
+        post('/api/notice', notice)
+            .then(navigate("/", {replace : true}))
+            .catch(e => console.log(e))
     }
 
     return (
@@ -27,41 +39,41 @@ const AddNotice = () => {
             </div>
 
             <Form onSubmit={handleSubmit}>
-                <Form.Group as={Row} className="mb-3" controlId="title">
+                <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">제목</Form.Label>
                     <Col sm="10">
-                        <Form.Control onChange={onChange} placeholder="100자 이하의 제목을 입력해주세요."></Form.Control>
+                        <Form.Control id="title" name="title" onChange={onChange} placeholder="100자 이하의 제목을 입력해주세요."></Form.Control>
                     </Col>
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3" controlId="user_name">
+                <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">작성자</Form.Label>
                     <Col sm="10">
-                        <Form.Control plaintext readOnly value="pong"/>
+                        <Form.Control id="create_by" name="create_by" plaintext readOnly value="pong" onChange={onChange}/>
                     </Col>
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3" controlId="content">
+                <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">내용</Form.Label>
                     <Col sm="10">
-                        <Form.Control as="textarea" rows={4} placeholder="250자 이하의 내용을 입력해주세요."/>
+                        <Form.Control id="content" name="content" as="textarea" rows={4} placeholder="250자 이하의 내용을 입력해주세요." onChange={onChange}/>
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">게시일</Form.Label>
                     <Col>
-                        <input id="start_at" type="datetime-local"/>
+                        <input id="start_at" name="start_at" type="datetime-local" onChange={onChange}/>
                     </Col>
                     <Col>
-                        <input id="end_at" type="datetime-local"/>
+                        <input id="end_at" name="end_at" type="datetime-local" onChange={onChange}/>
                     </Col>
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3" controlId="is_activated">
+                <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">활성화 여부</Form.Label>
                     <Col sm="10">
-                        <Form.Select aria-label="활성화 여부">
+                        <Form.Select id="is_activated" name="is_activated" defaultValue="true" aria-label="활성화 여부" onChange={onChange}>
                             <option value="true">활성화</option>
                             <option value="false">비활성화</option>
                         </Form.Select>
