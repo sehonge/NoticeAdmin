@@ -1,7 +1,6 @@
 import Table from "react-bootstrap/Table";
 
 const NoticeTable = (data) => {
-    console.log(data);
     return (
         <Table striped bordered hover  style={{borderSpacing: '10px'}}>
             <thead>
@@ -31,7 +30,6 @@ const NoticeTable = (data) => {
             </tbody>
         </Table>
     )
-
 }
 
 export default NoticeTable;

@@ -48,7 +48,6 @@ const MainPage = () => {
             <br/>
             <br/>
 
-
             <NoticeTable notices={notices.content}></NoticeTable>
 
             <hr className="my-4"/>
