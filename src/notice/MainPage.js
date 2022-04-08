@@ -24,6 +24,7 @@ const MainPage = () => {
             .then(response => {
                 console.log(response)
                 setNotices(response);
+                setPageInfo(response)
             })
 
         setLoading(false);
@@ -52,7 +53,7 @@ const MainPage = () => {
 
             <hr className="my-4"/>
             <div className="float-end">
-                {/*<NoticePageNumber pageInfo={pageInfo} setPageNumber={setPageNumber}></NoticePageNumber>*/}
+                <NoticePageNumber pageInfo={pageInfo} setPageNumber={setPageNumber}></NoticePageNumber>
             </div>
         </Container>
     )

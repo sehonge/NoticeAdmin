@@ -2,12 +2,12 @@ import {Pagination} from "react-bootstrap";
 
 const NoticePageNumber = ({pageInfo, setPageNumber}) => {
 
-    const currentPage = pageInfo.number;
+    const currentPage = pageInfo.pageable.pageNumber;
+    const page_size = pageInfo.pageable.pageSize;
+    const active = pageInfo.pageable.pageNumber + 1;
 
-    let active = pageInfo.number + 1;
-    const beginNumber = Math.floor(pageInfo.number / pageInfo.pageable.pageSize) * pageInfo.pageable.pageSize + 1;
+    const beginNumber = Math.floor(currentPage / page_size) * page_size + 1;
     let endNumber;
-
     if (pageInfo.empty === true) {
         endNumber = 1;
     } else {
