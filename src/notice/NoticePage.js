@@ -10,7 +10,12 @@ const NoticePage = () => {
     const [loading, setLoading] = useState(false);
     const notice_id = useParams().id;
     const [notice, setNotice] = useState({
-        id: notice_id
+        id: notice_id,
+        title: "",
+        content: "",
+        start_at: "",
+        end_at: "",
+        is_activated: ""
     });
 
     let navigate = useNavigate();
