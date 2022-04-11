@@ -26,7 +26,6 @@ const AddNotice = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(notice);
         post('/api/notice', notice)
             .then(navigate("/", {replace : true}))
             .catch(e => console.log(e))

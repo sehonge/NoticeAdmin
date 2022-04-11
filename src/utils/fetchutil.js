@@ -33,3 +33,16 @@ export const post = (url, body) => {
         .then(result => result.json())
         .catch(e => console.log(e))
 }
+
+export const put = (url, body) => {
+    return fetch(url, {
+        method: "PUT",
+        headers: {
+            ...commonHeader,
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        body: JSON.stringify(body)
+    })
+        .then(result => result.json())
+        .catch(e => console.log(e))
+}

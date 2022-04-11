@@ -2,13 +2,16 @@ import {Col, Container, Form, FormGroup, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {get, post} from "../utils/fetchutil";
+import {get, post, put} from "../utils/fetchutil";
 
 const NoticePage = () => {
 
-    const [notice, setNotice] = useState(null);
     const [loading, setLoading] = useState(false);
     const notice_id = useParams().id;
+    const [notice, setNotice] = useState(null);
+
+
+    let navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -28,6 +31,19 @@ const NoticePage = () => {
         });
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setNotice({
+            ...notice,
+            id: notice_id
+        });
+
+        put("/api/notice", notice)
+            .then(navigate("/", {replace: true}))
+            .catch(e => console.log(e))
+    }
+
     if (loading) return <div>로딩중...</div>
     else if (notice === null) return <div>데이터를 받아오는 중...</div>
 
@@ -37,7 +53,7 @@ const NoticePage = () => {
                 <h2>공지사항</h2>
             </div>
 
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">제목</Form.Label>
                     <Col sm="10">
