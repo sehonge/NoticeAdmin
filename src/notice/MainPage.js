@@ -12,6 +12,13 @@ const MainPage = () => {
     const [loading, setLoading] = useState(false);
     const [notices, setNotices] = useState(null);
     const [pageInfo, setPageInfo] = useState(null);
+    const [search, setSearch] = useState({
+        title: "",
+        start_at: "",
+        end_at: "",
+        update_by: "",
+        is_activated: ""
+    })
 
     useEffect(() => {
         setLoading(true);
@@ -22,7 +29,6 @@ const MainPage = () => {
 
         get('/api/notice', parameters)
             .then(response => {
-                console.log(response)
                 setNotices(response);
                 setPageInfo(response)
             })

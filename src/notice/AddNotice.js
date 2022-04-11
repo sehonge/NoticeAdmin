@@ -3,11 +3,15 @@ import Button from "react-bootstrap/Button";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {post} from "../utils/fetchutil";
+import {validateNotice} from "../utils/validateNotice";
 
 const AddNotice = () => {
 
-
     const initial_notice = {
+        title: "",
+        content: "",
+        start_at: "",
+        end_at: "",
         is_activated: "true",
         create_by: "pong"
     }
@@ -26,9 +30,11 @@ const AddNotice = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/api/notice', notice)
-            .then(navigate("/", {replace : true}))
-            .catch(e => console.log(e))
+        if (validateNotice(notice.title, notice.content, notice.start_at, notice.end_at)) {
+            post('/api/notice', notice)
+                .then(navigate("/", {replace: true}))
+                .catch(e => console.log(e))
+        }
     }
 
     return (

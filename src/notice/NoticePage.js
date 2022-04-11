@@ -3,13 +3,15 @@ import Button from "react-bootstrap/Button";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {get, post, put} from "../utils/fetchutil";
+import {validateNotice} from "../utils/validateNotice";
 
 const NoticePage = () => {
 
     const [loading, setLoading] = useState(false);
     const notice_id = useParams().id;
-    const [notice, setNotice] = useState(null);
-
+    const [notice, setNotice] = useState({
+        id: notice_id
+    });
 
     let navigate = useNavigate();
 
@@ -33,15 +35,11 @@ const NoticePage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        setNotice({
-            ...notice,
-            id: notice_id
-        });
-
-        put("/api/notice", notice)
-            .then(navigate("/", {replace: true}))
-            .catch(e => console.log(e))
+        if (validateNotice(notice.title, notice.content, notice.start_at, notice.end_at)) {
+            put("/api/notice", notice)
+                .then(navigate("/", {replace: true}))
+                .catch(e => console.log(e))
+        }
     }
 
     if (loading) return <div>로딩중...</div>
