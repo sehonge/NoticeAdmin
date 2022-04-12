@@ -1,5 +1,6 @@
 import Table from "react-bootstrap/Table";
 import {Link} from "react-router-dom";
+import {dateFormat} from "../utils/dateFormatter";
 
 const NoticeTable = (data) => {
     return (
@@ -25,8 +26,8 @@ const NoticeTable = (data) => {
                             {notice.title}
                         </Link>
                     </td>
-                    <td>{notice.start_at}</td>
-                    <td>{notice.end_at}</td>
+                    <td>{dateFormat(notice.start_at)}</td>
+                    <td>{dateFormat(notice.end_at)}</td>
                     <td>{notice.update_by}</td>
                     <td>{notice.create_by}</td>
                     <td>{notice.is_activated ? "Y" : "N"}</td>
