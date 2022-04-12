@@ -26,13 +26,16 @@ const MainPage = () => {
         setLoading(true);
 
         const parameters = {
-            page: pageNumber
+            page: pageNumber,
+            ...search
         }
+        console.log(parameters);
 
-        get('/api/notice', parameters)
+        get('/api/notice/search', parameters)
             .then(response => {
                 setNotices(response);
-                setPageInfo(response)
+                setPageInfo(response);
+                console.log(response);
             })
 
         setLoading(false);
