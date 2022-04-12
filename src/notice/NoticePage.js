@@ -91,7 +91,7 @@ const NoticePage = () => {
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">활성화 여부</Form.Label>
                     <Col sm="10">
-                        <Form.Select id="is_activated" name="is_activated" defaultValue={notice.is_activated} aria-label="활성화 여부" onChange={onChange}>
+                        <Form.Select id="is_activated" name="is_activated" defaultValue={notice.is_activated} onChange={onChange}>
                             <option value="true">활성화</option>
                             <option value="false">비활성화</option>
                         </Form.Select>

@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
 import {get} from "../utils/fetchutil";
-import {Container} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import NoticeTable from "./NoticeTable";
 import NoticePageNumber from "./NoticePageNumber";
 import Button from "react-bootstrap/Button"
 import {Link} from "react-router-dom";
+import SearchNotice from "./SearchNotice";
 
 const MainPage = () => {
 
@@ -14,6 +15,7 @@ const MainPage = () => {
     const [pageInfo, setPageInfo] = useState(null);
     const [search, setSearch] = useState({
         title: "",
+        content: "",
         start_at: "",
         end_at: "",
         update_by: "",
@@ -34,7 +36,7 @@ const MainPage = () => {
             })
 
         setLoading(false);
-    }, [pageNumber])
+    }, [pageNumber, search])
 
     if (loading) return <div>로딩중...</div>
     else if (notices === null) return <div>데이터를 받아오는 중...</div>
@@ -45,10 +47,15 @@ const MainPage = () => {
                 <h2>공지 어드민</h2>
             </div>
 
+            <hr className="my-5"/>
+
+            <SearchNotice search={search} setSearch={setSearch} setPageNumber={setPageNumber}/>
+            <br/>
             <br/>
             <hr className="my-4"/>
+
             <Link to="/add">
-                <Button variant="primary" className="float-end">등록</Button>
+                <Button variant="secondary" className="float-end">공지 등록</Button>
             </Link>
             <br/>
             <br/>
