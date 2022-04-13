@@ -45,7 +45,7 @@ const MainPage = () => {
     else if (notices === null) return <div>데이터를 받아오는 중...</div>
 
     return (
-        <Container>
+        <Container style={{width:"75%"}}>
             <div>
                 <h2>공지 어드민</h2>
             </div>
@@ -55,7 +55,7 @@ const MainPage = () => {
             <SearchNotice search={search} setSearch={setSearch} setPageNumber={setPageNumber}/>
             <br/>
             <br/>
-            <hr className="my-4"/>
+            <hr/>
 
             <Link to="/add">
                 <Button variant="secondary" className="float-end">공지 등록</Button>

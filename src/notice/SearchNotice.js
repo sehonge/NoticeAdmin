@@ -56,14 +56,16 @@ const SearchNotice = ({search, setSearch, setPageNumber}) => {
             <Row className="mb-3">
                 <Form.Group as={Col}>
                     <Form.Label column className="mb-2">게시 시작 시간</Form.Label>
-                    <input id="start_at" name="start_at" type="datetime-local" value={tempNotice.start_at}
-                           onChange={onChange}/>
+                    <Form.Floating as={"div"}>
+                        <input id="start_at" name="start_at" type="datetime-local" value={tempNotice.start_at} onChange={onChange}/>
+                    </Form.Floating>
                 </Form.Group>
 
                 <Form.Group as={Col}>
                     <Form.Label column className="mb-2">게시 종료 시간</Form.Label>
-                    <input id="end_at" name="end_at" type="datetime-local" value={tempNotice.end_at}
-                           onChange={onChange}/>
+                    <Form.Floating as={"div"}>
+                        <input id="end_at" name="end_at" type="datetime-local" value={tempNotice.end_at} onChange={onChange}/>
+                    </Form.Floating>
                 </Form.Group>
 
                 <Form.Group as={Col}>
