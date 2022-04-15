@@ -12,7 +12,7 @@ export const get = (url, parameters) => {
             .map(key => encodeURIComponent(snakeToCamel(key)) + '=' + encodeURIComponent(parameters[key]))
             .join('&');
     }
-    console.log(url + query);
+
     return fetch(url + query, {
         method: "GET",
         headers: {

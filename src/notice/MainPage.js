@@ -6,6 +6,7 @@ import NoticePageNumber from "./NoticePageNumber";
 import Button from "react-bootstrap/Button"
 import {Link} from "react-router-dom";
 import SearchNotice from "./SearchNotice";
+import {validateSearchTime} from "../utils/validateNotice";
 
 const MainPage = () => {
 
@@ -19,7 +20,8 @@ const MainPage = () => {
         start_at: '',
         end_at: '',
         update_by: '',
-        is_activated: ''
+        is_activated: 'all',
+        create_by: ''
     })
 
     useEffect(() => {
@@ -29,13 +31,13 @@ const MainPage = () => {
             page: pageNumber,
             ...search
         }
-        console.log(parameters);
-
-        get('/api/notice/search', parameters)
-            .then(response => {
-                setNotices(response);
-                setPageInfo(response);
-            })
+        if (validateSearchTime(parameters.start_at, parameters.end_at)) {
+            get('/api/notice/search', parameters)
+                .then(response => {
+                    setNotices(response);
+                    setPageInfo(response);
+                })
+        }
 
         setLoading(false);
     }, [pageNumber, search])

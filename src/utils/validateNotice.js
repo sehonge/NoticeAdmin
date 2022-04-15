@@ -1,7 +1,7 @@
 const titleLimitLen = 100;
 const contentLimitLen = 250;
 
-export const validateNotice = (title, content, start_at, end_at) => {
+const validateNotice = (title, content, start_at, end_at) => {
     return validateTitle(title) && validateContent(content) && validateTime(start_at, end_at);
 }
 
@@ -22,6 +22,17 @@ const validateTime = (start_at, end_at) => {
     }
 
     return true;
+}
+
+const validateSearchTime = (start_at, end_at) => {
+    if (start_at.length === 0 || end_at.length === 0) {
+        return true;
+    } else if (start_at > end_at) {
+        alert("게시 종료시간을 게시 시작시간보다 미래로 설정해주세요.");
+        return false;
+    } else {
+        return true;
+    }
 }
 
 const validateTitle = (title) => {
@@ -60,4 +71,9 @@ const checkContentMax = (target, msg) => {
     } else {
         return false;
     }
+}
+
+export {
+    validateNotice,
+    validateSearchTime
 }

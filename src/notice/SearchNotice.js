@@ -1,6 +1,6 @@
 import {Col, Form, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 
 const SearchNotice = ({search, setSearch, setPageNumber}) => {
@@ -29,6 +29,7 @@ const SearchNotice = ({search, setSearch, setPageNumber}) => {
 
     const submitHandle = (e) => {
         e.preventDefault();
+
         setPageNumber(0);
         setSearch(tempNotice);
     }
@@ -57,14 +58,14 @@ const SearchNotice = ({search, setSearch, setPageNumber}) => {
                 <Form.Group as={Col}>
                     <Form.Label column className="mb-2">게시 시작 시간</Form.Label>
                     <Form.Floating as={"div"}>
-                        <input id="start_at" name="start_at" type="datetime-local" value={tempNotice.start_at} onChange={onChange}/>
+                        <input id="start_at" name="start_at" type="date" value={tempNotice.start_at} onChange={onChange} style={{width:"90%"}}/>
                     </Form.Floating>
                 </Form.Group>
 
                 <Form.Group as={Col}>
                     <Form.Label column className="mb-2">게시 종료 시간</Form.Label>
                     <Form.Floating as={"div"}>
-                        <input id="end_at" name="end_at" type="datetime-local" value={tempNotice.end_at} onChange={onChange}/>
+                        <input id="end_at" name="end_at" type="date" value={tempNotice.end_at} onChange={onChange} style={{width:"90%"}}/>
                     </Form.Floating>
                 </Form.Group>
 
