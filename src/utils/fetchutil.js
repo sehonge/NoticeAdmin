@@ -1,3 +1,4 @@
+import snakeToCamel from "./jsonutil";
 
 const commonHeader = {
     'X-Requested-With':'XMLHttpRequest'
@@ -8,9 +9,10 @@ export const get = (url, parameters) => {
 
     if (parameters !== null) {
         query = '?' + Object.keys(parameters)
-            .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(parameters[key]))
+            .map(key => encodeURIComponent(snakeToCamel(key)) + '=' + encodeURIComponent(parameters[key]))
             .join('&');
     }
+    console.log(url + query);
     return fetch(url + query, {
         method: "GET",
         headers: {

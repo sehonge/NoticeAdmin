@@ -72,7 +72,7 @@ const SearchNotice = ({search, setSearch, setPageNumber}) => {
                     <Form.Label column>활성화 여부</Form.Label>
                     <Form.Select id="is_activated" name="is_activated" value={tempNotice.is_activated}
                                  onChange={onChange}>
-                        <option value="all">전체</option>
+                        <option value="">전체</option>
                         <option value="true">활성화</option>
                         <option value="false">비활성화</option>
                     </Form.Select>

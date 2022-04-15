@@ -14,12 +14,12 @@ const MainPage = () => {
     const [notices, setNotices] = useState(null);
     const [pageInfo, setPageInfo] = useState(null);
     const [search, setSearch] = useState({
-        title: "",
-        content: "",
-        start_at: "",
-        end_at: "",
-        update_by: "",
-        is_activated: ""
+        title: '',
+        content: '',
+        start_at: '',
+        end_at: '',
+        update_by: '',
+        is_activated: ''
     })
 
     useEffect(() => {
@@ -35,7 +35,6 @@ const MainPage = () => {
             .then(response => {
                 setNotices(response);
                 setPageInfo(response);
-                console.log(response);
             })
 
         setLoading(false);
