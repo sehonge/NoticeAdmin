@@ -9,6 +9,7 @@ export const get = (url, parameters) => {
 
     if (parameters !== null) {
         query = '?' + Object.keys(parameters)
+            .filter(key => parameters[key].length !== 0)
             .map(key => encodeURIComponent(snakeToCamel(key)) + '=' + encodeURIComponent(parameters[key]))
             .join('&');
     }
