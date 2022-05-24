@@ -1,7 +1,7 @@
 import snakeToCamel from "./jsonutil";
 
 const commonHeader = {
-    'X-Requested-With':'XMLHttpRequest'
+    'X-Requested-With': 'XMLHttpRequest'
 };
 
 export const get = (url, parameters) => {
@@ -14,13 +14,15 @@ export const get = (url, parameters) => {
             .join('&');
     }
 
+    console.log(url + query);
+
     return fetch(url + query, {
         method: "GET",
         headers: {
             ...commonHeader
         }
     })
-        .then(result => result.json())
+        .then(result => console.log(result.json()))
         .catch(e => console.log(e))
 };
 
