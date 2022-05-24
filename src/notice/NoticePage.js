@@ -51,10 +51,11 @@ const NoticePage = () => {
     else if (notice === null) return <div>데이터를 받아오는 중...</div>
 
     return (
+
         <Container style={{width:"50%"}}>
-            <div className="py-5 text-center">
+            '<div className="py-5 text-center">
                 <h2>공지사항</h2>
-            </div>
+            </div>'
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3">

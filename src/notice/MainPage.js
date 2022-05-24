@@ -7,11 +7,13 @@ import Button from "react-bootstrap/Button"
 import {Link} from "react-router-dom";
 import SearchNotice from "./SearchNotice";
 import {validateSearchTime} from "../utils/validateNotice";
+import InitialPage from "./InitialPage";
 
 const MainPage = () => {
 
     const [pageNumber, setPageNumber] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
     const [notices, setNotices] = useState(null);
     const [pageInfo, setPageInfo] = useState(null);
     const [search, setSearch] = useState({
@@ -26,6 +28,11 @@ const MainPage = () => {
 
     useEffect(() => {
         setLoading(true);
+        if (sessionStorage.getItem("id") !== null) {
+            setIsLogin(true);
+        } else {
+            setIsLogin(false);
+        }
 
         const parameters = {
             page: pageNumber,
@@ -43,6 +50,7 @@ const MainPage = () => {
     }, [pageNumber, search])
 
     if (loading) return <div>로딩중...</div>
+    else if (isLogin === false) return <div><InitialPage/></div>
     else if (notices === null) return <div>데이터를 받아오는 중...</div>
 
     return (
