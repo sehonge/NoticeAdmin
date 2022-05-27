@@ -1,10 +1,11 @@
 import {Container, Form, Nav, NavItem, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {get} from "../utils/fetchutil";
 import {useNavigate} from "react-router-dom";
+import {validateUser} from "../utils/validateUser";
 
-const InitialPage = () => {
+const InitialPage = ({setIsLogin}) => {
 
     const [user, setUser] = useState({
         userId: '',
@@ -16,15 +17,24 @@ const InitialPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        get("/user/login", user)
-            .then(sessionStorage.setItem("userId", user.userId))
-            .then(navigate("/", {replace: true}))
-            .catch(e => console.log(e))
-
-
-        // .then(sessionStorage.setItem("id", user.id))
-        // .then(navigate("/", {replace: true}))
-        // .catch(console.log(e.type))
+        if (validateUser(user.userId, user.password)) {
+            get("/api/user/login", user)
+                .then(response => {
+                    if (response.status === 200) {
+                        sessionStorage.setItem("userId", user.userId);
+                        setIsLogin(true);
+                    } else if (response.status === 400) {
+                        console.log(response);
+                        alert("아이디 혹은 비밀번호의 길이가 잘못되었습니다.")
+                    } else if (response.status === 404) {
+                        console.log(response);
+                        alert("아이디 혹은 비밀번호가 틀렸습니다.")
+                    } else {
+                        console.log(response);
+                        alert("일시적인 서버 오류가 발생했습니다.");
+                    }
+                })
+        }
     }
 
     const onChange = (e) => {

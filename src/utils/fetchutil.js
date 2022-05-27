@@ -22,8 +22,6 @@ export const get = (url, parameters) => {
             ...commonHeader
         }
     })
-        .then(result => console.log(result.json()))
-        .catch(e => console.log(e))
 };
 
 export const post = (url, body) => {

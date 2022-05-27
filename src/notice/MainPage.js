@@ -28,7 +28,7 @@ const MainPage = () => {
 
     useEffect(() => {
         setLoading(true);
-        if (sessionStorage.getItem("id") !== null) {
+        if (sessionStorage.getItem("userId") !== null) {
             setIsLogin(true);
 
             const parameters = {
@@ -37,6 +37,7 @@ const MainPage = () => {
             }
             if (validateSearchTime(parameters.start_at, parameters.end_at)) {
                 get('/api/notice/search', parameters)
+                    .then(response => response.json())
                     .then(response => {
                         setNotices(response);
                         setPageInfo(response);
@@ -47,10 +48,10 @@ const MainPage = () => {
         }
 
         setLoading(false);
-    }, [pageNumber, search])
+    }, [pageNumber, search, isLogin])
 
     if (loading) return <div>로딩중...</div>
-    else if (isLogin === false) return <div><InitialPage/></div>
+    else if (isLogin === false) return <div><InitialPage setIsLogin={setIsLogin}/></div>
     else if (notices === null) return <div>데이터를 받아오는 중...</div>
 
     return (
