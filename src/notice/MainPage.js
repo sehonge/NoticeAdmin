@@ -30,20 +30,20 @@ const MainPage = () => {
         setLoading(true);
         if (sessionStorage.getItem("id") !== null) {
             setIsLogin(true);
+
+            const parameters = {
+                page: pageNumber,
+                ...search
+            }
+            if (validateSearchTime(parameters.start_at, parameters.end_at)) {
+                get('/api/notice/search', parameters)
+                    .then(response => {
+                        setNotices(response);
+                        setPageInfo(response);
+                    })
+            }
         } else {
             setIsLogin(false);
-        }
-
-        const parameters = {
-            page: pageNumber,
-            ...search
-        }
-        if (validateSearchTime(parameters.start_at, parameters.end_at)) {
-            get('/api/notice/search', parameters)
-                .then(response => {
-                    setNotices(response);
-                    setPageInfo(response);
-                })
         }
 
         setLoading(false);
