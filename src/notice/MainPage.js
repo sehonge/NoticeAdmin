@@ -26,6 +26,12 @@ const MainPage = () => {
         create_by: ''
     })
 
+    const Logout = (e) => {
+        sessionStorage.removeItem("userId")
+        setLoading(true);
+        setIsLogin(false);
+    }
+
     useEffect(() => {
         setLoading(true);
         if (sessionStorage.getItem("userId") !== null) {
@@ -57,7 +63,9 @@ const MainPage = () => {
     return (
         <Container style={{width:"75%"}}>
             <div>
+
                 <h2>공지 어드민</h2>
+                <Button variant="secondary" className="float-end" onClick={Logout}>로그 아웃</Button>
             </div>
 
             <hr className="my-5"/>
