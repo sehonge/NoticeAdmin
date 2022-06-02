@@ -13,7 +13,7 @@ const AddNotice = () => {
         start_at: "",
         end_at: "",
         is_activated: "true",
-        create_by: "pong"
+        create_by: sessionStorage.getItem("userId")
     }
     //TODO("cookie 사용해서 create_by에 cookie에 저장된 user_name 대입")
     let navigate = useNavigate();
@@ -26,6 +26,7 @@ const AddNotice = () => {
             ...notice,
             [name]: value
         });
+        console.log(notice);
     }
 
     const handleSubmit = (e) => {
@@ -61,7 +62,7 @@ const AddNotice = () => {
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">작성자</Form.Label>
                     <Col sm="10">
-                        <Form.Control id="create_by" name="create_by" plaintext readOnly value="pong"
+                        <Form.Control id="create_by" name="create_by" plaintext readOnly value={sessionStorage.getItem("userId")}
                                       onChange={onChange}/>
                     </Col>
                 </Form.Group>
