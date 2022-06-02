@@ -18,7 +18,7 @@ const validate = (target, minLen, maxLen) => {
 
 const duplicateCheck = async (parameter) => {
     let response = await get("/api/user/register", parameter);
-    await console.log(response);
+    console.log(response);
     if (response.status === 200) {
         return false;
     } else if (response.status === 400) {
@@ -30,20 +30,22 @@ const duplicateCheck = async (parameter) => {
     }
 }
 
-const checkUserId = (userId) => {
+const checkUserId = (userId, setMsg) => {
     if (userId.length < 6 || userId.length > 15) {
-        return "아이디의 길이는 6자 이상이고 15자 이하여야 합니다.";
+        setMsg("아이디의 길이는 6자 이상이고 15자 이하여야 합니다.");
     } else {
         const parameter = {
             userId: userId
         }
-        let response = duplicateCheck(parameter);
-        console.log(response);
-        // if (response === true) {
-        //     return "이미 회원가입된 아이디 입니다.";
-        // } else {
-        //     return "";
-        // }
+        duplicateCheck(parameter)
+            .then(result => {
+                if (result === true) {
+                    console.log(result);
+                    setMsg("이미 회원가입한 아이디 입니다.");
+                } else {
+                    setMsg("");
+                }
+            });
     }
 }
 

@@ -12,7 +12,8 @@ const RegisterPage = () => {
         userId: '',
         password: '',
         checkPassword: ''
-    })
+    });
+    const [msg, setMsg] = useState((null));
 
     let navigate = useNavigate();
 
@@ -36,11 +37,16 @@ const RegisterPage = () => {
     }
 
     const onBlur = (e) => {
+        checkUserId(user.userId, setMsg)
+    }
+
+    const onChange = (e) => {
         const {value, name} = e.target;
         setUser({
             ...user,
             [name]: value
         })
+        console.log(user);
     }
 
     return (
@@ -51,9 +57,9 @@ const RegisterPage = () => {
             <Form onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label>아이디</Form.Label>
-                    <Form.Control id="userId" name="userId" placeholder="아이디" onBlur={onBlur}/>
+                    <Form.Control id="userId" name="userId" placeholder="아이디" onBlur={onBlur} onChange={onChange}/>
                     <Form.Text className="text-danger">
-                        {checkUserId(user.userId)}
+                        {msg}
                     </Form.Text>
                 </Form.Group>
 
@@ -61,7 +67,8 @@ const RegisterPage = () => {
                     <Form.Label>비밀번호</Form.Label>
                     <Form.Control id="password" name="password" type="password"
                                   placeholder="비밀 번호"
-                                  onBlur={onBlur}/>
+                                  onBlur={onBlur}
+                                  onChange={onChange}/>
                     <Form.Text className="text-danger">
                         {checkPasswordLength(user.password)}
                     </Form.Text>
@@ -71,7 +78,8 @@ const RegisterPage = () => {
                     <Form.Label>비밀번호 확인</Form.Label>
                     <Form.Control id="checkPassword" name="checkPassword" type="password"
                                   placeholder="비밀 번호 확인"
-                                  onBlur={onBlur}/>
+                                  onBlur={onBlur}
+                                  onChange={onChange}/>
                     <Form.Text className="text-danger">
                         {checkPasswordCheck(user.password, user.checkPassword)}
                     </Form.Text>
