@@ -18,15 +18,14 @@ const validate = (target, minLen, maxLen) => {
 
 const duplicateCheck = async (parameter) => {
     let response = await get("/api/user/register", parameter);
-    console.log(response);
+
     if (response.status === 200) {
         return false;
     } else if (response.status === 400) {
-        console.log(1);
         return true;
     } else if (response.status >= 500) {
         alert("일시적인 서버 오류가 발생했습니다. 잠시 후 시도해 주십시오.");
-        return true;
+        throw Error("서버 오류 발생");
     }
 }
 
@@ -40,10 +39,9 @@ const checkUserId = (userId, setMsg) => {
         duplicateCheck(parameter)
             .then(result => {
                 if (result === true) {
-                    console.log(result);
                     setMsg("이미 회원가입한 아이디 입니다.");
                 } else {
-                    setMsg("");
+                    setMsg(" ");
                 }
             });
     }

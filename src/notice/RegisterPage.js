@@ -26,10 +26,8 @@ const RegisterPage = () => {
                     if (response.status === 200) {
                         navigate("/", {replace: true})
                     } else if (response.status === 400) {
-                        console.log(response);
                         alert("아이디 혹은 비밀번호의 길이가 잘못되었습니다.")
                     } else if (response.status >= 500) {
-                        console.log(response);
                         alert("일시적인 서버 오류가 발생했습니다. 잠시 후 시도해 주십시오.");
                     }
                 })
@@ -46,7 +44,6 @@ const RegisterPage = () => {
             ...user,
             [name]: value
         })
-        console.log(user);
     }
 
     return (
