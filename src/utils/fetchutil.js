@@ -14,8 +14,6 @@ export const get = (url, parameters) => {
             .join('&');
     }
 
-    console.log(url + query);
-
     return fetch(url + query, {
         method: "GET",
         headers: {

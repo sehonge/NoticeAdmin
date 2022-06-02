@@ -15,7 +15,8 @@ const NoticePage = () => {
         content: "",
         start_at: "",
         end_at: "",
-        is_activated: ""
+        is_activated: "",
+        update_by: ""
     });
 
     let navigate = useNavigate();
@@ -24,6 +25,7 @@ const NoticePage = () => {
         setLoading(true);
 
         get('/api/notice/' + notice_id, null)
+            .then(response => response.json())
             .then(response => setNotice(response))
             .catch(e => console.log(e))
 
@@ -40,6 +42,8 @@ const NoticePage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        notice.update_by = sessionStorage.getItem("userId");
         if (validateNotice(notice.title, notice.content, notice.start_at, notice.end_at)) {
             put("/api/notice", notice)
                 .then(navigate("/", {replace: true}))
@@ -68,7 +72,7 @@ const NoticePage = () => {
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">작성자</Form.Label>
                     <Col sm="10">
-                        <Form.Control id="create_by" name="create_by" plaintext readOnly value="pong"/>
+                        <Form.Control id="create_by" name="create_by" plaintext readOnly value={sessionStorage.getItem("userId")}/>
                     </Col>
                 </Form.Group>
 

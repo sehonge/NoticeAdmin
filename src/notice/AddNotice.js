@@ -26,7 +26,6 @@ const AddNotice = () => {
             ...notice,
             [name]: value
         });
-        console.log(notice);
     }
 
     const handleSubmit = (e) => {
