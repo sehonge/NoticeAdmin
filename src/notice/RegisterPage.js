@@ -23,7 +23,6 @@ const RegisterPage = () => {
         if (validateUser(user.userId, user.password)) {
             post("/api/user", user)
                 .then(response => {
-                    console.log(response);
                     if (response.status === 200) {
                         navigate("/", {replace: true})
                     } else if (response.status === 400) {

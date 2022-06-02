@@ -32,13 +32,19 @@ const AddNotice = () => {
         e.preventDefault();
         if (validateNotice(notice.title, notice.content, notice.start_at, notice.end_at)) {
             post('/api/notice', notice)
-                .then(navigate("/", {replace: true}))
+                .then(response => {
+                    if (response.status === 200) {
+                        navigate("/", {replace: true})
+                    } else if (response.status >= 500) {
+                        alert("서버에 일시적인 오류가 발생했습니다. 잠시후 시도해 주세요.");
+                    }
+                })
                 .catch(e => console.log(e))
         }
     }
 
     return (
-        <Container style={{width:"50%"}}>
+        <Container style={{width: "50%"}}>
             <div className="py-5 text-center">
                 <h2>공지사항 추가</h2>
             </div>
@@ -47,21 +53,24 @@ const AddNotice = () => {
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">제목</Form.Label>
                     <Col sm="10">
-                        <Form.Control id="title" name="title" onChange={onChange} placeholder="100자 이하의 제목을 입력해주세요."></Form.Control>
+                        <Form.Control id="title" name="title" onChange={onChange}
+                                      placeholder="100자 이하의 제목을 입력해주세요."></Form.Control>
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">작성자</Form.Label>
                     <Col sm="10">
-                        <Form.Control id="create_by" name="create_by" plaintext readOnly value="pong" onChange={onChange}/>
+                        <Form.Control id="create_by" name="create_by" plaintext readOnly value="pong"
+                                      onChange={onChange}/>
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">내용</Form.Label>
                     <Col sm="10">
-                        <Form.Control id="content" name="content" as="textarea" rows={4} placeholder="250자 이하의 내용을 입력해주세요." onChange={onChange}/>
+                        <Form.Control id="content" name="content" as="textarea" rows={4}
+                                      placeholder="250자 이하의 내용을 입력해주세요." onChange={onChange}/>
                     </Col>
                 </Form.Group>
 
@@ -78,7 +87,8 @@ const AddNotice = () => {
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">활성화 여부</Form.Label>
                     <Col sm="10">
-                        <Form.Select id="is_activated" name="is_activated" defaultValue="true" aria-label="활성화 여부" onChange={onChange}>
+                        <Form.Select id="is_activated" name="is_activated" defaultValue="true" aria-label="활성화 여부"
+                                     onChange={onChange}>
                             <option value="true">활성화</option>
                             <option value="false">비활성화</option>
                         </Form.Select>
