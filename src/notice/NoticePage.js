@@ -38,6 +38,7 @@ const NoticePage = () => {
             ...notice,
             [name]: value
         });
+        console.log(notice);
     }
 
     const handleSubmit = (e) => {
@@ -51,15 +52,25 @@ const NoticePage = () => {
         }
     }
 
+    const getIsActivatedDefaultValue = () => {
+        if (notice.is_activated === true) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
     if (loading) return <div>로딩중...</div>
     else if (notice === null) return <div>데이터를 받아오는 중...</div>
 
     return (
 
-        <Container style={{width:"50%"}}>
-            '<div className="py-5 text-center">
+        <Container style={{width: "50%"}}>
+            '
+            <div className="py-5 text-center">
                 <h2>공지사항</h2>
-            </div>'
+            </div>
+            '
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group as={Row} className="mb-3">
@@ -72,31 +83,36 @@ const NoticePage = () => {
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">작성자</Form.Label>
                     <Col sm="10">
-                        <Form.Control id="create_by" name="create_by" plaintext readOnly value={sessionStorage.getItem("userId")}/>
+                        <Form.Control id="create_by" name="create_by" plaintext readOnly
+                                      value={sessionStorage.getItem("userId")}/>
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">내용</Form.Label>
                     <Col sm="10">
-                        <Form.Control id="content" name="content" as="textarea" rows={4} value={notice.content} onChange={onChange}/>
+                        <Form.Control id="content" name="content" as="textarea" rows={4} value={notice.content}
+                                      onChange={onChange}/>
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">게시일</Form.Label>
                     <Col>
-                        <input id="start_at" name="start_at" type="datetime-local" value={notice.start_at} onChange={onChange}/>
+                        <input id="start_at" name="start_at" type="datetime-local" value={notice.start_at}
+                               onChange={onChange}/>
                     </Col>
                     <Col>
-                        <input id="end_at" name="end_at" type="datetime-local" value={notice.end_at} onChange={onChange}/>
+                        <input id="end_at" name="end_at" type="datetime-local" value={notice.end_at}
+                               onChange={onChange}/>
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm="2">활성화 여부</Form.Label>
                     <Col sm="10">
-                        <Form.Select id="is_activated" name="is_activated" defaultValue={notice.is_activated} onChange={onChange}>
+                        <Form.Select id="is_activated" name="is_activated" key={notice.is_activated} defaultValue={notice.is_activated}
+                                     onChange={onChange}>
                             <option value="true">활성화</option>
                             <option value="false">비활성화</option>
                         </Form.Select>
