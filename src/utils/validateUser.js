@@ -64,5 +64,5 @@ const checkPasswordCheck = (password, passwordCheck, setPasswordCheckMsg) => {
 }
 
 export {
-    validateUser, checkUserId, checkPasswordCheck, checkPasswordLength
+    validateUser, checkUserId, checkPasswordCheck, checkPasswordLength, duplicateCheck
 }

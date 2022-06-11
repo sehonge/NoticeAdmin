@@ -2,9 +2,8 @@ import {Col, Container, Form, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {validateUser} from "../utils/validateUser";
-import {post, get} from "../utils/fetchutil";
-import {checkUserId, checkPasswordCheck, checkPasswordLength} from "../utils/validateUser"
+import {checkPasswordCheck, checkPasswordLength, checkUserId, validateUser} from "../utils/validateUser";
+import {post} from "../utils/fetchutil";
 
 const RegisterPage = () => {
 

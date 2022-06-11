@@ -42,6 +42,4 @@ export const put = (url, body) => {
         },
         body: JSON.stringify(body)
     })
-        .then(result => result.json())
-        .catch(e => console.log(e))
 }
