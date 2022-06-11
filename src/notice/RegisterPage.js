@@ -13,7 +13,9 @@ const RegisterPage = () => {
         password: '',
         checkPassword: ''
     });
-    const [msg, setMsg] = useState((null));
+    const [idMsg, setIdMsg] = useState((null));
+    const [passwordMsg, setPasswordMsg] = useState((null));
+    const [passwordCheckMsg, setPasswordCheckMsg] = useState((null));
 
     let navigate = useNavigate();
 
@@ -35,7 +37,9 @@ const RegisterPage = () => {
     }
 
     const onBlur = (e) => {
-        checkUserId(user.userId, setMsg)
+        checkUserId(user.userId, setIdMsg)
+        checkPasswordLength(user.password, setPasswordMsg)
+        checkPasswordCheck(user.password, user.checkPassword, setPasswordCheckMsg)
     }
 
     const onChange = (e) => {
@@ -56,7 +60,7 @@ const RegisterPage = () => {
                     <Form.Label>아이디</Form.Label>
                     <Form.Control id="userId" name="userId" placeholder="아이디" onBlur={onBlur} onChange={onChange}/>
                     <Form.Text className="text-danger">
-                        {msg}
+                        {idMsg}
                     </Form.Text>
                 </Form.Group>
 
@@ -67,7 +71,7 @@ const RegisterPage = () => {
                                   onBlur={onBlur}
                                   onChange={onChange}/>
                     <Form.Text className="text-danger">
-                        {checkPasswordLength(user.password)}
+                        {passwordMsg}
                     </Form.Text>
                 </Form.Group>
 
@@ -78,7 +82,7 @@ const RegisterPage = () => {
                                   onBlur={onBlur}
                                   onChange={onChange}/>
                     <Form.Text className="text-danger">
-                        {checkPasswordCheck(user.password, user.checkPassword)}
+                        {passwordCheckMsg}
                     </Form.Text>
                 </Form.Group>
 

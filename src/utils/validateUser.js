@@ -41,23 +41,25 @@ const checkUserId = (userId, setMsg) => {
                 if (result === true) {
                     setMsg("이미 회원가입한 아이디 입니다.");
                 } else {
-                    setMsg(" ");
+                    setMsg("");
                 }
             });
     }
 }
 
-const checkPasswordLength = (password) => {
+const checkPasswordLength = (password, setPasswordMsg) => {
     if (password.length < 8 || password.length > 20) {
-        return "비밀번호의 길이는 8자 이상이고 20자 이하여야 합니다.";
+        setPasswordMsg("비밀번호의 길이는 8자 이상이고 20자 이하여야 합니다.");
     } else {
-        return " ";
+        setPasswordMsg("");
     }
 }
 
-const checkPasswordCheck = (password, passwordCheck) => {
+const checkPasswordCheck = (password, passwordCheck, setPasswordCheckMsg) => {
     if (password !== passwordCheck) {
-        return "비밀번호가 일치하지 않습니다."
+        setPasswordCheckMsg("비밀번호가 일치하지 않습니다.");
+    } else {
+        setPasswordCheckMsg("");
     }
 }
 
